@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // Update updates the done value in a feedback entry
@@ -21,10 +20,7 @@ func (session *Session) Update(query []Filter, updates UpdateValue) error {
 		"$set": bson.M(updates),
 	}
 
-	filter := make([]primitive.E, len(query))
-	for i, entry := range query {
-		filter[i] = primitive.E(entry)
-	}
+	filter := convertToPrimary(query)
 
 	ctx, cancelCtx := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancelCtx()

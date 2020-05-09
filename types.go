@@ -11,7 +11,7 @@ type DB interface {
 	Get([]Filter, interface{}) error
 	Insert(interface{}) error
 	Delete([]Filter) error
-	GetAll(interface{}) error
+	GetAll([]Filter, interface{}) error
 	Update([]Filter, UpdateValue) error
 }
 

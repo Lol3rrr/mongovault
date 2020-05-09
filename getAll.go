@@ -3,12 +3,10 @@ package mongovault
 import (
 	"context"
 	"time"
-
-	"go.mongodb.org/mongo-driver/bson"
 )
 
 // GetAll loads all Feedback entrys from the Database
-func (session *Session) GetAll(results interface{}) error {
+func (session *Session) GetAll(query []Filter, results interface{}) error {
 	if !session.isConnectionAlive() {
 		err := session.reconnect()
 		if err != nil {
@@ -16,10 +14,12 @@ func (session *Session) GetAll(results interface{}) error {
 		}
 	}
 
+	filter := convertToPrimary(query)
+
 	ctx, cancelCtx := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancelCtx()
 
-	cur, err := session.MongoCollection.Find(ctx, bson.D{{}})
+	cur, err := session.MongoCollection.Find(ctx, filter)
 	if err != nil {
 		return err
 	}
