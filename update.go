@@ -11,7 +11,7 @@ import (
 // Update updates the done value in a feedback entry
 func (session *Session) Update(query []Filter, updates UpdateValue) error {
 	if !session.isConnectionAlive() {
-		err := session.loadCredsAndConnect()
+		err := session.reconnect()
 		if err != nil {
 			return err
 		}

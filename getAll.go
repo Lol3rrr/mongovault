@@ -10,7 +10,7 @@ import (
 // GetAll loads all Feedback entrys from the Database
 func (session *Session) GetAll(results interface{}) error {
 	if !session.isConnectionAlive() {
-		err := session.loadCredsAndConnect()
+		err := session.reconnect()
 		if err != nil {
 			return err
 		}

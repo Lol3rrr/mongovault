@@ -10,7 +10,7 @@ import (
 // Delete deletes the Entry with the matching filter from the Database
 func (session *Session) Delete(query []Filter) error {
 	if !session.isConnectionAlive() {
-		err := session.loadCredsAndConnect()
+		err := session.reconnect()
 		if err != nil {
 			return err
 		}

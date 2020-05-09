@@ -10,7 +10,7 @@ import (
 // Get loads the Feedback with the given ID
 func (session *Session) Get(query []Filter, result interface{}) error {
 	if !session.isConnectionAlive() {
-		err := session.loadCredsAndConnect()
+		err := session.reconnect()
 		if err != nil {
 			return err
 		}

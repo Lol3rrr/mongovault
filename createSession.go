@@ -13,7 +13,12 @@ func CreateSession(dbSettings DBOptions, vSettings VaultSettings) (DB, error) {
 		CredsEndpoint: vSettings.CredsName,
 	}
 
-	err := result.loadCredsAndConnect()
+	err := result.loadCreds()
+	if err != nil {
+		return result, err
+	}
+
+	err = result.Connect()
 	if err != nil {
 		return result, err
 	}

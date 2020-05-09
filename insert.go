@@ -8,7 +8,7 @@ import (
 // Insert inserts the given Feedback into the Database
 func (session *Session) Insert(content interface{}) error {
 	if !session.isConnectionAlive() {
-		err := session.loadCredsAndConnect()
+		err := session.reconnect()
 		if err != nil {
 			return err
 		}
