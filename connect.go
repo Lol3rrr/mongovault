@@ -9,8 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-// Connect takes the given Session and connects to the Database
-func (session *Session) Connect() error {
+func (session *Session) connect() error {
 	ctx, cancelCtx := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancelCtx()
 

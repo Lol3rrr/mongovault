@@ -7,11 +7,23 @@ import (
 
 // DB defines all the function exposed for interactions
 type DB interface {
-	Connect() error
+	// Get loads the first entry, that matches the filters into
+	// the given interface
 	Get([]Filter, interface{}) error
-	Insert(interface{}) error
-	Delete([]Filter) error
+	// GetAll loads all entries, that match the filters, into
+	// the given interface
 	GetAll([]Filter, interface{}) error
+	// Insert is used to insert the given into the Database
+	Insert(interface{}) error
+	// Delete removes the first element, that matches the given
+	// filters, from the Database
+	Delete([]Filter) error
+	// DeleteMany removes all the elements, that match the given
+	// filters, from the Database
+	DeleteMany([]Filter) error
+	// Update updates the first elements, that matches the given
+	// filters, by updating the values according to the given
+	// UpdateValue
 	Update([]Filter, UpdateValue) error
 }
 

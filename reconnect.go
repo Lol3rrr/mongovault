@@ -11,11 +11,11 @@ func (session *Session) reconnect() error {
 		session.MongoClient.Disconnect(context.TODO())
 	}
 
-	err := session.Connect()
+	err := session.connect()
 	if err.Error() == authErrorMessage {
 		session.loadCreds()
 
-		return session.Connect()
+		return session.connect()
 	}
 
 	return err

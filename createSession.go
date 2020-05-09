@@ -18,7 +18,7 @@ func CreateSession(dbSettings DBOptions, vSettings VaultSettings) (DB, error) {
 		return result, err
 	}
 
-	err = result.Connect()
+	err = result.connect()
 	if err != nil {
 		return result, err
 	}
