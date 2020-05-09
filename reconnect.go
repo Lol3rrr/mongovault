@@ -3,8 +3,9 @@ package mongovault
 import (
 	"context"
 	"errors"
-	"fmt"
 )
+
+const authErrorMessage string = "connection() : auth error: sasl conversation error: unable to authenticate using mechanism \"SCRAM-SHA-1\": (AuthenticationFailed) Authentication failed."
 
 func (session *Session) reconnect() error {
 	if session.MongoClient != nil {
@@ -12,13 +13,11 @@ func (session *Session) reconnect() error {
 	}
 
 	err := session.Connect()
-	if errors.Is(err, errors.New("test")) {
+	if errors.Is(err, errors.New(authErrorMessage)) {
 		session.loadCreds()
 
 		return session.Connect()
 	}
-
-	fmt.Printf("Error: '%s' \n", err)
 
 	return err
 }
