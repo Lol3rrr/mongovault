@@ -1,7 +1,7 @@
 package mongovault
 
 import (
-	"github.com/Lol3rrr/cvault"
+	"github.com/hashicorp/vault/api"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -40,7 +40,7 @@ type Session struct {
 	MongoClient     *mongo.Client
 	MongoCollection *mongo.Collection
 
-	VaultSession  cvault.Session
+	VaultSession  *api.Client
 	CredsEndpoint string
 }
 
@@ -55,7 +55,7 @@ type DBOptions struct {
 
 // VaultSettings is used to provide the Base Settings for a Session
 type VaultSettings struct {
-	Session   cvault.Session
+	Session   *api.Client
 	CredsName string
 }
 

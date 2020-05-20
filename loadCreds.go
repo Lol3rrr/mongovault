@@ -2,12 +2,13 @@ package mongovault
 
 import (
 	"errors"
+	"fmt"
 )
 
 func (s *Session) loadCreds() error {
-	data, err := s.VaultSession.ReadData(s.CredsEndpoint)
+	data, err := s.readCreds()
 	if err != nil {
-		return errors.New("Could not load Credentials from Vault")
+		return fmt.Errorf("Could not load Credentials: %s", err)
 	}
 
 	creds := data.Data
