@@ -3,6 +3,7 @@ package mongovault
 import (
 	"github.com/hashicorp/vault/api"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 // DB defines all the function exposed for interactions
@@ -21,10 +22,10 @@ type DB interface {
 	// DeleteMany removes all the elements, that match the given
 	// filters, from the Database
 	DeleteMany([]Filter) error
-	// Update updates the first elements, that matches the given
+	// Update updates the all elements, that match the given
 	// filters, by updating the values according to the given
 	// UpdateValue
-	Update([]Filter, UpdateValue) error
+	Update([]Filter, UpdateValue, ...*options.UpdateOptions) error
 }
 
 // Session is the actual struct that implements the DB interface
