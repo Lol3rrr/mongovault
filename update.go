@@ -17,9 +17,7 @@ func (session *Session) Update(query []Filter, updates UpdateValue, opts ...*opt
 		}
 	}
 
-	update := bson.M{
-		"$set": bson.M(updates),
-	}
+	update := bson.M(updates)
 
 	filter := convertToPrimary(query)
 
