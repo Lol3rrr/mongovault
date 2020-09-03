@@ -26,7 +26,7 @@ func (session *Session) Update(query []Filter, updates UpdateValue, opts ...*opt
 	ctx, cancelCtx := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancelCtx()
 
-	_, err := session.MongoCollection.UpdateMany(ctx, filter, update, opts)
+	_, err := session.MongoCollection.UpdateMany(ctx, filter, update, opts...)
 
 	return err
 }
